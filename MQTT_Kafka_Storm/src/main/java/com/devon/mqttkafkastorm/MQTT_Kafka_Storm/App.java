@@ -34,7 +34,7 @@ public class App
 
 		Config config = new Config();
 
-		// config.setDebug(true);
+		// config.setDebug(true );
 
 		TopologyBuilder builder = new TopologyBuilder();
 		builder.setSpout("kafkaspout", new KafkaSpout(spoutConfig),4);
