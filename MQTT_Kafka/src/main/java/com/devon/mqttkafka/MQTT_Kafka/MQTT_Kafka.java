@@ -22,7 +22,7 @@ public class MQTT_Kafka
 			
 			bridge.subscribe(topics);
 			
-			
+			//s
 		} catch (MqttException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
