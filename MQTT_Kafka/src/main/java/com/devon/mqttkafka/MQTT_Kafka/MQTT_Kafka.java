@@ -18,7 +18,7 @@ public class MQTT_Kafka
     	
     	try {
     		System.out.println("Listening");
-			bridge.connect("tcp://messagesight.demos.ibm.com:1883", "devonkafka1", "172.17.16.169:2181");
+			bridge.connect("tcp://messagesight.demos.ibm.com:1883", "devonkafka1", "192.168.0.17:2181");
 			
 			bridge.subscribe(topics);
 			

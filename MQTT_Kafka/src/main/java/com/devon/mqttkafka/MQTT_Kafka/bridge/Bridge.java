@@ -46,7 +46,7 @@ public class Bridge implements MqttCallback {
 		mqtt.setCallback(this);
 		IMqttToken token = mqtt.connect();
 		Properties props = new Properties();
-		props.put("metadata.broker.list", "172.17.16.169:9092");
+		props.put("metadata.broker.list", "192.168.0.17:6667");
 		props.put("zk.connect", zkConnect);
 		props.put("serializer.class", "kafka.serializer.StringEncoder");
 		/*props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");

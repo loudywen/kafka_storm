@@ -23,7 +23,7 @@ public class App
 {
     public static void main( String[] args )
     {
-    	ZkHosts hosts = new ZkHosts("172.17.16.162");
+    	ZkHosts hosts = new ZkHosts("192.168.0.17");
 		hosts.refreshFreqSecs = 99999;
 		SpoutConfig spoutConfig = new SpoutConfig(hosts, "demo", "", "test-consumer-group");
 		spoutConfig.scheme = new SchemeAsMultiScheme(new StringScheme());
@@ -40,7 +40,7 @@ public class App
 		builder.setSpout("kafkaspout", new KafkaSpout(spoutConfig),4);
 		builder.setBolt("extractjsonbolt", new ExtractJsonBolt(),4).shuffleGrouping("kafkaspout");
 		builder.setBolt("notification", new NotificationBolt(),4).fieldsGrouping("extractjsonbolt", new Fields("email"));
-
+		
 		LocalCluster cluster = new LocalCluster();
 		cluster.submitTopology("kafkastorm", config, builder.createTopology());
     }
