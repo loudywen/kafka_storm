@@ -84,9 +84,9 @@ public class NotificationBolt1 implements IRichBolt {
 			collector.ack(input);
 		}
 		
-		//test http request
+	/*	//test http request
 		collector.emit(new Values(input.getStringByField("email"),input.getStringByField("tempValue"),timeInterval.get(input.getStringByField("email"))));
-		collector.ack(input);
+		collector.ack(input);*/
 	}
 
 	public void cleanup() {

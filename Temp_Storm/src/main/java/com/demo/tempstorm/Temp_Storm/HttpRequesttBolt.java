@@ -20,7 +20,7 @@ public class HttpRequesttBolt implements IRichBolt {
 	private static Logger log = LoggerFactory.getLogger(HttpRequesttBolt.class);
 	private Client client;
 	private String tempUrl = "http://localhost:8080/rest/restapi/sendtemp?temp=";
-	private String tempUrl2;
+	//private String tempUrl2;
 	private OutputCollector collector;
 
 	public void prepare(Map stormConf, TopologyContext context, OutputCollector collector) {
@@ -31,19 +31,22 @@ public class HttpRequesttBolt implements IRichBolt {
 
 	public void execute(Tuple input) {
 		String data = input.getStringByField("tempValue");
-		tempUrl2 = tempUrl+data+"&"+"y=d";
-		log.info(tempUrl2);
-		WebResource webResource = client.resource(tempUrl2);
+		String email = input.getStringByField("email");
+		String timestamp = input.getStringByField("dateTimeValue");
+		tempUrl = tempUrl+data+"&email="+email+"&timestamp="+timestamp;
+		//tempUrl.replaceAll(" ", "%20");
+		log.info(tempUrl);
+		WebResource webResource = client.resource(tempUrl.replaceAll(" ", "%20"));
 		ClientResponse response = webResource.accept("application/json").get(ClientResponse.class);
 		// a successful response returns 200
 		if (response.getStatus() != 200) {
 			collector.fail(input);
-			throw new RuntimeException("HTTP Error: " + response.getStatus());
+			log.error("HTTP Error: " + response.getStatus());
 		
 		}
 
 		String result = response.getEntity(String.class);
-		log.info("Response from the Server: ");
+		//log.info("Response from the Server: ");
 		//log.info(result);
 		
 		collector.ack(input);
