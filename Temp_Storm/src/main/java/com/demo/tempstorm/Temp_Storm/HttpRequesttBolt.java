@@ -2,9 +2,6 @@ package com.demo.tempstorm.Temp_Storm;
 
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -17,7 +14,7 @@ import backtype.storm.tuple.Tuple;
 
 public class HttpRequesttBolt implements IRichBolt {
 
-	private static Logger log = LoggerFactory.getLogger(HttpRequesttBolt.class);
+//	private static Logger log = LoggerFactory.getLogger(HttpRequesttBolt.class);
 	private Client client;
 	private String tempUrl = "http://localhost:8080/rest/restapi/sendtemp?temp=";
 	//private String tempUrl2;
@@ -35,13 +32,13 @@ public class HttpRequesttBolt implements IRichBolt {
 		String timestamp = input.getStringByField("dateTimeValue");
 		tempUrl = tempUrl+data+"&email="+email+"&timestamp="+timestamp;
 		//tempUrl.replaceAll(" ", "%20");
-		log.info(tempUrl);
+		//log.info(tempUrl);
 		WebResource webResource = client.resource(tempUrl.replaceAll(" ", "%20"));
 		ClientResponse response = webResource.accept("application/json").get(ClientResponse.class);
 		// a successful response returns 200
 		if (response.getStatus() != 200) {
 			collector.fail(input);
-			log.error("HTTP Error: " + response.getStatus());
+		//	log.error("HTTP Error: " + response.getStatus());
 		
 		}
 

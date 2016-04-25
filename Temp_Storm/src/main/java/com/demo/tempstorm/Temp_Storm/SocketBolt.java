@@ -1,14 +1,7 @@
 package com.demo.tempstorm.Temp_Storm;
 
-import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.UnknownHostException;
-import java.util.ArrayList;
 import java.util.Map;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 
 import backtype.storm.task.OutputCollector;
 import backtype.storm.task.TopologyContext;
@@ -22,7 +15,7 @@ import io.socket.emitter.Emitter;
 public class SocketBolt implements IRichBolt {
 
 	
-	private static final Logger logger = LogManager.getLogger(SocketBolt.class);
+	//private static final Logger logger = LogManager.getLogger(SocketBolt.class);
 	private OutputCollector collector;
 
 	public void prepare(Map stormConf, TopologyContext context, OutputCollector collector) {
@@ -32,7 +25,7 @@ public class SocketBolt implements IRichBolt {
 
 	public void execute(Tuple input) {
 		final String str = input.getStringByField("email")+","+input.getStringByField("tempValue")+","+input.getStringByField("dateTimeValue");
-		logger.info("========================SocketBolt  sendding data to socket=============================");
+		//logger.info("========================SocketBolt  sendding data to socket=============================");
 		try {
 			final Socket socket;
 			socket = IO.socket("http://172.17.16.126:3000");
@@ -60,7 +53,7 @@ public class SocketBolt implements IRichBolt {
 			
 		
 		} catch (URISyntaxException e) {
-			logger.error("URISyntaxException: " + e.getMessage());
+			//logger.error("URISyntaxException: " + e.getMessage());
 			collector.fail(input);
 		}
 	

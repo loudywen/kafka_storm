@@ -4,9 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.demo.tempstorm.model.D;
 import com.demo.tempstorm.model.Datetime;
 import com.demo.tempstorm.model.Temp;
@@ -24,7 +21,7 @@ import backtype.storm.tuple.Values;
 public class ExtractJsonBolt1 implements IRichBolt {
 	private Gson gson;
 	private OutputCollector collector;
-	private static final Logger logger = LogManager.getLogger(ExtractJsonBolt1.class);
+	//private static final Logger logger = LogManager.getLogger(ExtractJsonBolt1.class);
 
 	public void prepare(Map stormConf, TopologyContext context, OutputCollector collector) {
 		this.collector = collector;
@@ -42,11 +39,11 @@ public class ExtractJsonBolt1 implements IRichBolt {
 			Temp temp = d.getTemp();
 			Datetime dateTime = d.getDatetime();
 			collector.emit(new Values(email, temp.getValue(), currentTime));
-			logger.info("ExtractJsonBolt Done!");
+			//logger.info("ExtractJsonBolt Done!");
 			collector.ack(input);
 			
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			//logger.error(e.getMessage());
 			collector.fail(input);
 		}
 

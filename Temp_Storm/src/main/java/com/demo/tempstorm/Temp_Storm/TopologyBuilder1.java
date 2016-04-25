@@ -14,7 +14,7 @@ public class TopologyBuilder1 {
 
 	public StormTopology build() {
 
-		ZkHosts hosts = new ZkHosts("192.168.0.17");
+		ZkHosts hosts = new ZkHosts("172.17.16.184");
 		hosts.refreshFreqSecs = 99999;
 		SpoutConfig spoutConfig = new SpoutConfig(hosts, "demo", "", "test-consumer-group");
 		spoutConfig.startOffsetTime = -1;
